@@ -3,3 +3,5 @@ data
 *.p
 *.h5
 car_training_data/
+videos/
+run*
