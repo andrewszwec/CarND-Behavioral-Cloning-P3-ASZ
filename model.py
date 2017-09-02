@@ -13,15 +13,13 @@ import keras
 from keras.models import Sequential, Model
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
-from keras.layers.noise import GaussianNoise
+#from keras.layers.noise import GaussianNoise
 from keras import backend as K
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 # Flipping
 from keras.layers import Lambda
 from keras.layers import Cropping2D
 import os
-import csv
-import cv2
 import numpy as np
 import sklearn
 from sklearn.utils import shuffle
@@ -56,7 +54,7 @@ train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 
 # Hyperparameters - leave these in this position
 batch_size = 128
-epochs = 10
+epochs = 1
 learn_rate = 0.001
 drop_rate = 0.3
 
@@ -130,7 +128,7 @@ model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(img_h,img_w,ch)))
 # Crop
 model.add(Cropping2D(cropping=((top_crop, bottom_crop), (left_crop, right_crop)) )) # , input_shape=(3,160,320)))
 # Add Random Noise - Prevents overfitting
-model.add( GaussianNoise(stddev=1.0) )
+#model.add( GaussianNoise(stddev=1.0) )
 
 # Conv Layer 1
 model.add(Conv2D(24, (5, 5), strides=(2,2), activation='relu', padding='same')) # filters = 8
@@ -163,7 +161,7 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=learn_rate))
 
 # num train samples * 3 for centre, left, right camera, *2 for augmentation
-batch_step_factor = 3*2 # Need 3*2 to use full dataset each epoch
+batch_step_factor = 0.5 #3*2 # Need 3*2 to use full dataset each epoch
 
 history_object = model.fit_generator(train_generator,
                     # num train samples * 3 for centre, left, right camera, *2 for augmentation
