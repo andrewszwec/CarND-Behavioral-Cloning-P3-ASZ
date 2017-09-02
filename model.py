@@ -23,7 +23,7 @@ import os
 import numpy as np
 import sklearn
 from sklearn.utils import shuffle
-
+print('>>> Imports complete...')
 
 # # Generator model
 def prepImage(path, img_dir):
@@ -51,6 +51,7 @@ with open(driving_log) as csvfile:
 from sklearn.model_selection import train_test_split
 train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 
+print('>>> Samples prepared...')
 
 # Hyperparameters - leave these in this position
 batch_size = 128
@@ -111,6 +112,8 @@ def generator(samples, batch_size=32):
 train_generator = generator(train_samples, batch_size=batch_size)
 validation_generator = generator(validation_samples, batch_size=batch_size)
 
+print('>>> Generator Setup...')
+
 # Build model
 callbacks = [
     EarlyStopping(monitor='val_loss', min_delta=0.0001, patience=5),
@@ -120,6 +123,8 @@ callbacks = [
 img_h, img_w, ch = 160, 320, 3
 top_crop, bottom_crop = 50, 20
 left_crop, right_crop = 0, 0
+
+print('>>> Start Model Build...')
 
 model = Sequential()
 
@@ -162,6 +167,8 @@ model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=learn_rate))
 
 # num train samples * 3 for centre, left, right camera, *2 for augmentation
 batch_step_factor = 0.5 #3*2 # Need 3*2 to use full dataset each epoch
+
+print('>>> Start training...')
 
 history_object = model.fit_generator(train_generator,
                     # num train samples * 3 for centre, left, right camera, *2 for augmentation
