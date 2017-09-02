@@ -56,7 +56,7 @@ print('>>> Samples prepared...')
 
 # Hyperparameters - leave these in this position
 batch_size = 256
-epochs = 15
+epochs = 5
 learn_rate = 0.01
 drop_rate = 0.3
 
@@ -184,14 +184,14 @@ history_object = model.fit_generator(train_generator,
 
 
 ### print the keys contained in the history object
-print(history_object.history.keys())
-
-### plot the training and validation loss for each epoch
-plt.plot(history_object.history['loss'])
-plt.plot(history_object.history['val_loss'])
-plt.title('model mean squared error loss')
-plt.ylabel('mean squared error loss')
-plt.xlabel('epoch')
-plt.legend(['training set', 'validation set'], loc='upper right')
-# plt.show()
-plt.savefig('mse_plot.png')
+# print(history_object.history.keys())
+#
+# ### plot the training and validation loss for each epoch
+# plt.plot(history_object.history['loss'])
+# plt.plot(history_object.history['val_loss'])
+# plt.title('model mean squared error loss')
+# plt.ylabel('mean squared error loss')
+# plt.xlabel('epoch')
+# plt.legend(['training set', 'validation set'], loc='upper right')
+# # plt.show()
+# plt.savefig('mse_plot.png')
