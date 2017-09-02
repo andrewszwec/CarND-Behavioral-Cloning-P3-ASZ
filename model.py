@@ -54,9 +54,9 @@ train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 print('>>> Samples prepared...')
 
 # Hyperparameters - leave these in this position
-batch_size = 128
-epochs = 1
-learn_rate = 0.001
+batch_size = 256
+epochs = 5
+learn_rate = 0.01
 drop_rate = 0.3
 
 # My Generator
