@@ -13,7 +13,7 @@ import keras
 from keras.models import Sequential, Model
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
-from keras.layers.noise import GaussianNoise
+#from keras.layers.noise import GaussianNoise
 from keras import backend as K
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 # Flipping
@@ -88,7 +88,7 @@ def generator(samples, batch_size=32):
                 steering_center = float(batch_sample[3])
                 angles.append(steering_center)
 
-                correction = 1 # this is a parameter to tune 0.2
+                correction = 1.0 # this is a parameter to tune 0.2
                 steering_left = steering_center + correction
                 angles.append(steering_left)
                 steering_right = steering_center - correction
@@ -133,7 +133,7 @@ model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(img_h,img_w,ch)))
 # Crop
 model.add(Cropping2D(cropping=((top_crop, bottom_crop), (left_crop, right_crop)) )) # , input_shape=(3,160,320)))
 # Add Random Noise - Prevents overfitting
-model.add( GaussianNoise(stddev=1.0) )
+#model.add( GaussianNoise(stddev=1.0) )
 
 # Conv Layer 1
 model.add(Conv2D(24, (5, 5), strides=(2,2), activation='relu', padding='same')) # filters = 8
@@ -166,7 +166,7 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=learn_rate))
 
 # num train samples * 3 for centre, left, right camera, *2 for augmentation
-batch_step_factor = 2 #3*2 # Need 3*2 to use full dataset each epoch
+batch_step_factor = 3*2 # Need 3*2 to use full dataset each epoch
 
 print('>>> Start training...')
 
