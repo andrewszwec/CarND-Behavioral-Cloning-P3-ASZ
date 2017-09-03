@@ -137,12 +137,12 @@ model.add(Cropping2D(cropping=((top_crop, bottom_crop), (left_crop, right_crop))
 #model.add( GaussianNoise(stddev=1.0) )
 
 # Conv Layer 1
-model.add(Conv2D(24, (5, 5), strides=(2,2), activation='relu', padding='same')) # filters = 8
+model.add(Conv2D(24, (3, 3), strides=(2,2), activation='relu', padding='same')) # filters = 8
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(drop_rate))
 
 # Conv Layer 2
-model.add(Conv2D(36, (5, 5), strides=(2,2), activation='relu', padding='same')) # filters = 16
+model.add(Conv2D(36, (3, 3), strides=(2,2), activation='relu', padding='same')) # filters = 16
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(drop_rate))
 
@@ -152,14 +152,14 @@ model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(drop_rate))
 
 # Conv Layer 4
-model.add(Conv2D(64, (3, 3), strides=(1,1), activation='relu', padding='same')) # filters = 64
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(drop_rate))
+# model.add(Conv2D(64, (3, 3), strides=(1,1), activation='relu', padding='same')) # filters = 64
+# model.add(MaxPooling2D(pool_size=(2, 2)))
+# model.add(Dropout(drop_rate))
 
 model.add(Flatten())
-model.add(Dense(1024, activation='relu'))
-model.add(Dense(100, activation='relu'))
-model.add(Dense(50, activation='relu'))
+model.add(Dense(256, activation='relu'))
+model.add(Dense(128, activation='relu'))
+model.add(Dense(64, activation='relu'))
 model.add(Dense(10, activation='relu'))
 #model.add(Dropout(drop_rate))
 model.add(Dense(1))
@@ -178,9 +178,6 @@ history_object = model.fit_generator(train_generator,
                     validation_steps= (len(validation_samples)*batch_step_factor) / batch_size,
                     epochs=epochs,
                     callbacks=callbacks)
-
-
-
 
 
 ### print the keys contained in the history object
