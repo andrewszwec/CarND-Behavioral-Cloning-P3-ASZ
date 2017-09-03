@@ -3,7 +3,7 @@
 ---
 
 The goals / steps of this project are the following:
-  
+
 * Use the simulator to collect data of good driving behavior  
 * Build, a convolution neural network in Keras that predicts steering angles from images  
 * Train and validate the model with a training and validation set  
@@ -73,8 +73,6 @@ To combat the overfitting, I modified the model so that it used a dropout after 
 
 Then I modified the strides to be (2,2) to allow the network to train more quickly and reduce overfitting.
 
-Also, I changed the first convolutional layer to have a filter dimension of (5,5) to capture larger features in the images.
-
 The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track these included the corners with red/white striped borders and at the bridge. To improve the driving behavior in these cases, I recorded more training data in the simulator and retrained the model.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
@@ -88,7 +86,7 @@ The final model architecture consisted of a convolution neural network with the 
 |-----------|---|
 | Lambda Normalisation Layer | NA |
 | Cropping Layer | 90x320 |
-| Conv1 | Filters=24, Size=(5,5), Strides=(2,2), Padding=Same, Activation=Relu|
+| Conv1 | Filters=24, Size=(3,3), Strides=(2,2), Padding=Same, Activation=Relu|
 | Maxpooling | Size=(2,2) |
 | Dropout | drop rate = 0.3 |
 | Conv2 | Filters=36, Size=(3,3), Strides=(2,2), Padding=Same, Activation=Relu|
@@ -101,9 +99,9 @@ The final model architecture consisted of a convolution neural network with the 
 | Maxpooling | Size=(2,2) |
 | Dropout | drop rate = 0.3 |
 |Flatten| NA |
-| Fully Connected| Dim=1024, Activation=Relu|
-| Fully Connected| Dim=100, Activation=Relu||
-| Fully Connected| Dim=50, Activation=Relu||
+| Fully Connected| Dim=256, Activation=Relu|
+| Fully Connected| Dim=128, Activation=Relu||
+| Fully Connected| Dim=64, Activation=Relu||
 | Fully Connected| Dim=10, Activation=Relu||
 | Fully Connected| Dim=1, Activation=Linear|
 
