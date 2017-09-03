@@ -152,9 +152,9 @@ model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(drop_rate))
 
 # Conv Layer 4
-# model.add(Conv2D(64, (3, 3), strides=(1,1), activation='relu', padding='same')) # filters = 64
-# model.add(MaxPooling2D(pool_size=(2, 2)))
-# model.add(Dropout(drop_rate))
+model.add(Conv2D(64, (3, 3), strides=(1,1), activation='relu', padding='same')) # filters = 64
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(drop_rate))
 
 model.add(Flatten())
 model.add(Dense(256, activation='relu'))
@@ -167,7 +167,7 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=learn_rate))
 
 # num train samples * 3 for centre, left, right camera, *2 for augmentation
-batch_step_factor = 3*2 # Need 3*2 to use full dataset each epoch
+batch_step_factor = 0.25 # Need 3*2 to use full dataset each epoch
 
 print('>>> Start training...')
 
