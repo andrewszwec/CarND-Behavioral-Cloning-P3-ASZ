@@ -56,7 +56,7 @@ print('>>> Samples prepared...')
 
 # Hyperparameters - leave these in this position
 batch_size = 256
-epochs = 5
+epochs = 10
 learn_rate = 0.01
 drop_rate = 0.3
 
@@ -167,7 +167,7 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=learn_rate))
 
 # num train samples * 3 for centre, left, right camera, *2 for augmentation
-batch_step_factor = 0.25 # Need 3*2 to use full dataset each epoch
+batch_step_factor = 0.5 # Need 3*2 to use full dataset each epoch
 
 print('>>> Start training...')
 
