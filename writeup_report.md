@@ -88,21 +88,19 @@ The final model architecture consisted of a convolution neural network with the 
 | Cropping Layer | 90x320 |
 | Conv1 | Filters=24, Size=(3,3), Strides=(2,2), Padding=Same, Activation=Relu|
 | Maxpooling | Size=(2,2) |
-| Dropout | drop rate = 0.3 |
 | Conv2 | Filters=36, Size=(3,3), Strides=(2,2), Padding=Same, Activation=Relu|
 | Maxpooling | Size=(2,2) |
-| Dropout | drop rate = 0.3 |
 | Conv3 | Filters=48, Size=(3,3), Strides=(1,1), Padding=Same, Activation=Relu|
 | Maxpooling | Size=(2,2) |
-| Dropout | drop rate = 0.3 |
 | Conv4 | Filters=64, Size=(3,3), Strides=(1,1), Padding=Same, Activation=Relu|
 | Maxpooling | Size=(2,2) |
-| Dropout | drop rate = 0.3 |
 |Flatten| NA |
 | Fully Connected| Dim=256, Activation=Relu|
-| Fully Connected| Dim=128, Activation=Relu||
-| Fully Connected| Dim=64, Activation=Relu||
-| Fully Connected| Dim=10, Activation=Relu||
+| Dropout | drop rate = 0.3 |
+| Fully Connected| Dim=128, Activation=Relu|
+| Dropout | drop rate = 0.3 |
+| Fully Connected| Dim=64, Activation=Relu|
+| Fully Connected| Dim=10, Activation=Relu|
 | Fully Connected| Dim=1, Activation=Linear|
 
 

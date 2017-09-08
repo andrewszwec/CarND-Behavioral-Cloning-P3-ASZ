@@ -1088,20 +1088,12 @@ body .markdown-body
 <td>Size=(2,2)</td>
 </tr>
 <tr>
-<td>Dropout</td>
-<td>drop rate = 0.3</td>
-</tr>
-<tr>
 <td>Conv2</td>
 <td>Filters=36, Size=(3,3), Strides=(2,2), Padding=Same, Activation=Relu</td>
 </tr>
 <tr>
 <td>Maxpooling</td>
 <td>Size=(2,2)</td>
-</tr>
-<tr>
-<td>Dropout</td>
-<td>drop rate = 0.3</td>
 </tr>
 <tr>
 <td>Conv3</td>
@@ -1112,20 +1104,12 @@ body .markdown-body
 <td>Size=(2,2)</td>
 </tr>
 <tr>
-<td>Dropout</td>
-<td>drop rate = 0.3</td>
-</tr>
-<tr>
 <td>Conv4</td>
 <td>Filters=64, Size=(3,3), Strides=(1,1), Padding=Same, Activation=Relu</td>
 </tr>
 <tr>
 <td>Maxpooling</td>
 <td>Size=(2,2)</td>
-</tr>
-<tr>
-<td>Dropout</td>
-<td>drop rate = 0.3</td>
 </tr>
 <tr>
 <td>Flatten</td>
@@ -1136,8 +1120,16 @@ body .markdown-body
 <td>Dim=256, Activation=Relu</td>
 </tr>
 <tr>
+<td>Dropout</td>
+<td>drop rate = 0.3</td>
+</tr>
+<tr>
 <td>Fully Connected</td>
 <td>Dim=128, Activation=Relu</td>
+</tr>
+<tr>
+<td>Dropout</td>
+<td>drop rate = 0.3</td>
 </tr>
 <tr>
 <td>Fully Connected</td>
