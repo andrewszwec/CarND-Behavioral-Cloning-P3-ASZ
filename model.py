@@ -20,10 +20,10 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.layers import Lambda
 from keras.layers import Cropping2D
 import os
-import numpy as np
 import sklearn
 from sklearn.utils import shuffle
-import matplotlib.pyplot as plt
+from keras.utils import plot_model
+from keras import regularizers
 print('>>> Imports complete...')
 
 # # Generator model
@@ -89,7 +89,7 @@ def generator(samples, batch_size=32):
                 steering_center = float(batch_sample[3])
                 angles.append(steering_center)
 
-                correction = 1.0 # this is a parameter to tune 0.2
+                correction = 0.5 # this is a parameter to tune 0.2
                 steering_left = steering_center + correction
                 angles.append(steering_left)
                 steering_right = steering_center - correction
@@ -117,7 +117,7 @@ print('>>> Generator Setup...')
 
 # Build model
 callbacks = [
-    EarlyStopping(monitor='val_loss', min_delta=0.0001, patience=5),
+    EarlyStopping(monitor='val_loss', min_delta=0.001, patience=5),
     ModelCheckpoint('model.h5', monitor='val_loss', save_best_only=True, verbose=0)
 ]
 
@@ -139,35 +139,40 @@ model.add(Cropping2D(cropping=((top_crop, bottom_crop), (left_crop, right_crop))
 # Conv Layer 1
 model.add(Conv2D(24, (3, 3), strides=(2,2), activation='relu', padding='same')) # filters = 8
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(drop_rate))
+#model.add(Dropout(drop_rate))
 
 # Conv Layer 2
 model.add(Conv2D(36, (3, 3), strides=(2,2), activation='relu', padding='same')) # filters = 16
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(drop_rate))
+#model.add(Dropout(drop_rate))
 
 # Conv Layer 3
 model.add(Conv2D(48, (3, 3), strides=(1,1), activation='relu', padding='same')) # filters = 32
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(drop_rate))
+#model.add(Dropout(drop_rate))
 
 # Conv Layer 4
 model.add(Conv2D(64, (3, 3), strides=(1,1), activation='relu', padding='same')) # filters = 64
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(drop_rate))
+#model.add(Dropout(drop_rate))
 
 model.add(Flatten())
-model.add(Dense(256, activation='relu'))
+model.add(Dense(256, activation='relu' )) #, 
+                #kernel_regularizer=regularizers.l2(0.01),
+               # activity_regularizer=regularizers.l1(0.01)))
+model.add(Dropout(drop_rate))
 model.add(Dense(128, activation='relu'))
+model.add(Dropout(drop_rate))
 model.add(Dense(64, activation='relu'))
 model.add(Dense(10, activation='relu'))
-#model.add(Dropout(drop_rate))
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=learn_rate))
 
+plot_model(model, to_file='model.png')
+
 # num train samples * 3 for centre, left, right camera, *2 for augmentation
-batch_step_factor = 2 # Need 3*2 to use full dataset each epoch
+batch_step_factor = 3*2 # Need 3*2 to use full dataset each epoch
 
 print('>>> Start training...')
 
